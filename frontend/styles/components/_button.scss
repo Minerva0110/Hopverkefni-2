@@ -1,0 +1,14 @@
+@use '../utils/variables';
+
+.button {
+  background-color: variables.$primary-color;
+  color: white;
+  padding: variables.$padding;
+  border: none;
+  border-radius: variables.$border-radius;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(variables.$primary-color, 10%);
+  }
+}

@@ -1,0 +1,80 @@
+// Global Imports
+@use './utils/variables';
+@use './base/reset';
+@use './components/button';
+@use './layout/nav';
+
+// Typography & Colors
+$primary-color: #0070f3;
+$secondary-color: #1e1e1e;
+$accent-color: #e0f2ff;
+$font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Base Styles
+body {
+  font-family: $font-stack;
+  background-color: #f9f9f9;
+  color: $secondary-color;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken($primary-color, 10%);
+    text-decoration: underline;
+  }
+}
+
+// Utility Classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+// Buttons (override or extend component default if needed)
+button {
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  transition: background-color 0.3s ease;
+  background-color: $primary-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

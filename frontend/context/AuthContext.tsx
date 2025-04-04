@@ -9,6 +9,8 @@ type User = {
 };
 
 
+
+
 interface AuthContextType {
   token: string | null;
   user: User | null;
@@ -40,10 +42,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = (token: string, user: User) => {
-    localStorage.setItem("token", token);
+    localStorage.setItem('token', token);
     setToken(token);
     setUser(user);
   };
+  
 
   const logout = () => {
     localStorage.removeItem('token');

@@ -1,4 +1,4 @@
-import './globals.css';
+import '../../styles/globals.scss';
 import { AuthProvider } from '../../context/AuthContext';
 import Navbar from '../../components/Navbar';
 

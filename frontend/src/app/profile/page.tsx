@@ -14,7 +14,7 @@ type Item = {
 
 type Category = {
   id: number;
-  name: string;
+  title: string;
   items: Item[];
 };
 
@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
       {categories.map((category) => (
         <div key={category.id} className="mb-8">
-          <h2 className="text-xl font-semibold text-blue-800 mb-3">{category.name}</h2>
+          <h2 className="text-xl font-semibold text-blue-800 mb-3">{category.title}</h2>
 
           <ul className="space-y-3">
             {category.items.map((item) => (

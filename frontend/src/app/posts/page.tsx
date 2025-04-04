@@ -8,6 +8,7 @@ type Item = {
   description: string;
   priority: boolean;
   due: string;
+  completed: boolean;
   category: {
     name: string;
   };
