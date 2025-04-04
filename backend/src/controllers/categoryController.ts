@@ -3,7 +3,11 @@ import prisma from "../models/db.js";
 
 export const getCategories = async (req: Request, res: Response) => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+      include: {
+        items: true,
+      },
+    });
     res.json(categories);
   } catch (error) {
     console.error("Error fetching categories:", error);

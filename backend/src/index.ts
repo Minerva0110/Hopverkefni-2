@@ -30,7 +30,6 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-// Global error handler
 app.use((err: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error("Server Error:", err);
   res.status(500).json({ error: "Internal Server Error" });

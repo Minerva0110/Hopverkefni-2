@@ -4,6 +4,7 @@ import db from "../models/db.js";
 
 const router = Router();
 
+
 router.get("/users", authenticate, isAdmin, async (req, res, next) => {
   try {
     const users = await db.user.findMany({ select: { id: true, email: true, role: true } });

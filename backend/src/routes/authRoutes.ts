@@ -48,9 +48,16 @@ router.post("/login", validate(loginSchema), async (req, res): Promise<void> => 
     expiresIn: "1h",
   });
 
-  res.json({ token });
+  res.json({
+    token,
+    user: {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    },
+  });
 });
-
+  
 router.get("/user", authenticate, (req: AuthRequest, res) => {
   res.json({ message: `Welcome ${req.user?.username}, you are logged in as ${req.user?.role}` });
 });

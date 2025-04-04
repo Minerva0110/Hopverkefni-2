@@ -35,6 +35,15 @@ async function main() {
     },
   });
 
+  const user = await prisma.user.create({
+    data: {
+      username: 'newadmin',
+      email: 'admin@example.com',
+      password: password1,
+      role: 'admin',
+    },
+  });
+
   const category1 = await prisma.category.create({
     data: { title: "Þróun" },
   });
