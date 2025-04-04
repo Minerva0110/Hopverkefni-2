@@ -1,4 +1,4 @@
-# Hopverkefni-1
+# Hopverkefni-2
 
 ## Vefforritun 2 - Uppsetning og Keyrsla
 
