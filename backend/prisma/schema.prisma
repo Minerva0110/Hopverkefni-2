@@ -16,6 +16,7 @@ model User {
   role      String   @default("user")
   createdAt DateTime @default(now())
   notes     Note[]
+  items     Item[]   @relation("UserItems")  
 }
 
 model Note {
@@ -37,14 +38,17 @@ model Item {
   description String?
   category    Category? @relation(name: "ItemToCategory", fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId  Int?
-  tags        String[]
+  tags        Json?     
   priority    Boolean   @default(false)
   modified    DateTime  @default(now())
   due         DateTime?
   deleted     Boolean   @default(false)
   completed   Boolean   @default(false)
   createdAt   DateTime  @default(now())
+  userId      Int?      
+  user        User?     @relation("UserItems", fields: [userId], references: [id]) 
 }
+
 
 model Category {
   id        Int      @id @default(autoincrement())

@@ -6,10 +6,9 @@ export const getItems = async (req: Request, res: Response) => {
     const items = await prisma.item.findMany({
       orderBy: { due: "asc" },
       include: {
-        category: true, 
+        category: true,
       },
     });
-
     res.json(items);
   } catch (error) {
     console.error("Error fetching items:", error);
@@ -37,20 +36,23 @@ export const getItemById = async (req: Request, res: Response): Promise<void> =>
 export const createItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, priority, due, categoryId } = req.body;
-    const user = req.user; // Token verður yfirfarið og notandinn fenginn úr session
+    const user = req.user; 
+
+    console.log("req.user:", user);
 
     if (!user) {
       res.status(401).json({ error: "Not authenticated" });
       return;
     }
 
+    // Við bætum `userId` þegar við búum til nýja færslu
     const newItem = await prisma.item.create({
       data: {
         title,
         description,
         priority,
         due: new Date(due),
-        userId: user.id, 
+        userId: user.id, // Bæta við `userId`
         ...(categoryId && {
           category: {
             connect: {
