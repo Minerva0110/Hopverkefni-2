@@ -17,7 +17,6 @@ export const getItems = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getItemById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
@@ -38,13 +37,12 @@ export const getItemById = async (req: Request, res: Response): Promise<void> =>
 export const createItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, priority, due, categoryId } = req.body;
-    const user = req.user; 
+    const user = req.user; // Token verður yfirfarið og notandinn fenginn úr session
 
     if (!user) {
       res.status(401).json({ error: "Not authenticated" });
       return;
     }
-
 
     const newItem = await prisma.item.create({
       data: {
@@ -70,7 +68,6 @@ export const createItem = async (req: Request, res: Response): Promise<void> => 
   }
 };
 
-
 export const updateItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const updatedItem = await prisma.item.update({
@@ -83,7 +80,6 @@ export const updateItem = async (req: Request, res: Response): Promise<void> => 
     res.status(500).json({ error: "Failed to update item" });
   }
 };
-
 
 export const deleteItem = async (req: Request, res: Response): Promise<void> => {
   try {

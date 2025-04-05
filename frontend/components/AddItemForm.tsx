@@ -21,7 +21,7 @@ export default function AddItemForm() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3001/categories') 
+    fetch('http://localhost:3001/categories') // Sækja flokka
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error('Villa við að sækja flokka:', err));
@@ -32,16 +32,22 @@ export default function AddItemForm() {
     setError('');
     setMessage('');
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Ekki er hægt að bæta við færslu án innskráningar');
+      return;
+    }
+
     try {
-      const res = await fetch('http://localhost:3001/items', {
+      const res = await fetch('http://localhost:3001/items', { // Breytt slóð fyrir rétt endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...formData,
-          categoryId: parseInt(formData.categoryId),
+          categoryId: parseInt(formData.categoryId), // Gakktu úr skugga um categoryId er rétt
         }),
       });
 
