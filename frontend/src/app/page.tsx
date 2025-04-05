@@ -6,7 +6,7 @@ export default function HomePage() {
     <main className="homepage">
       <h1>Verkefnalisti</h1>
       <div className="intro-text">
-        <p>Þetta verkefni er unnið fyrir Vefforritun 2 – hópverkefni 2.</p>
+        <p>Þetta verkefni er gert fyrir Vefforritun 2 – hópverkefni 2.</p>
         <p>
           Við settum upp notendakerfi þar sem bæði notendur og stjórnendur geta skráð sig inn,
           skoðað verkefni og bætt við færslum sem tengjast flokkum.

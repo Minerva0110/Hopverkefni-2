@@ -10,7 +10,7 @@ type Item = {
   priority: boolean;
   due: string;
   completed: boolean;
-  category: {
+  category?: {
     name: string;
   };
 };
@@ -20,6 +20,7 @@ export default function PostsPage() {
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const [showMessage, setShowMessage] = useState(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -37,15 +38,25 @@ export default function PostsPage() {
     if (isAuth !== true) return;
 
     const token = localStorage.getItem("token");
+    if (!token) return;
 
     fetch("http://localhost:3001/items", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Ekki tókst að sækja færslur");
+        return res.json();
+      })
       .then((data) => {
-        setItems(data);
+        if (Array.isArray(data)) {
+          setItems(data);
+        } else if (Array.isArray(data.items)) {
+          setItems(data.items);
+        } else {
+          setItems([]);
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -75,8 +86,15 @@ export default function PostsPage() {
     }
   };
 
+  const groupedItems = items.reduce((acc: Record<string, Item[]>, item) => {
+    const category = item.category?.name ?? '';
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(item);
+    return acc;
+  }, {});
+
   const handleToggleMessage = () => {
-    setShowMessage((prev) => !prev);
+    setShowMessage(prev => !prev);
   };
 
   if (loading) return <p className="p-4">Sæki færslur...</p>;
@@ -88,35 +106,24 @@ export default function PostsPage() {
       </div>
     );
   }
+
   return (
     <div className="posts-page">
       <div className="page-header">
         <h1 className="page-title">Færslur</h1>
-        <button
-          onClick={handleToggleMessage}
-          className="question-mark-btn"
-        >
-          ℹ️
-        </button>
+        <button onClick={handleToggleMessage} className="question-mark-btn">ℹ️</button>
       </div>
-  
+
       {showMessage && (
         <p className="info-message">
           Hér eru færslurnar þínar. Til að bæta við nýjum færslum, vinsamlegast farðu í prófílinn þinn.
         </p>
       )}
-  
+
       {items.length === 0 ? (
         <p className="empty-message">Engar færslur fundust.</p>
       ) : (
-        Object.entries(
-          items.reduce((acc: Record<string, Item[]>, item) => {
-            const category = item.category?.name ?? '';
-            if (!acc[category]) acc[category] = [];
-            acc[category].push(item);
-            return acc;
-          }, {})
-        ).map(([categoryName, categoryItems]) => (
+        Object.entries(groupedItems).map(([categoryName, categoryItems]) => (
           <section key={categoryName} className="category-group">
             <h2 className="category-title">{categoryName}</h2>
             <ul className="item-list">
@@ -131,24 +138,20 @@ export default function PostsPage() {
                       <span className="priority-badge">Mikilvægt</span>
                     )}
                   </div>
-  
+
                   <p className="item-description">{item.description}</p>
                   <p className="item-meta">
                     Skiladagur: {new Date(item.due).toLocaleDateString('is-IS')}
                   </p>
-  
+
                   <div className="item-checkbox">
                     <input
                       type="checkbox"
                       checked={item.completed}
-                      onChange={() =>
-                        handleToggleCompleted(item.id, item.completed)
-                      }
+                      onChange={() => handleToggleCompleted(item.id, item.completed)}
                     />
                     <label>
-                      {item.completed
-                        ? 'Lokið'
-                        : 'Haka við þegar verkefni er lokið'}
+                      {item.completed ? 'Lokið' : 'Haka við þegar verkefni er lokið'}
                     </label>
                   </div>
                 </li>
@@ -159,4 +162,4 @@ export default function PostsPage() {
       )}
     </div>
   );
-}  
+}
