@@ -1,0 +1,14 @@
+{
+    "build": {
+      "env": {
+        "NEXT_PRIVATE_TARGET": "server"
+      }
+    },
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
+    ]
+  }
+  
