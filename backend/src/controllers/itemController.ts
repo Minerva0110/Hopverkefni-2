@@ -6,10 +6,9 @@ export const getItems = async (req: Request, res: Response) => {
     const items = await prisma.item.findMany({
       orderBy: { due: "asc" },
       include: {
-        category: true, 
+        category: true,
       },
     });
-
     res.json(items);
   } catch (error) {
     console.error("Error fetching items:", error);
