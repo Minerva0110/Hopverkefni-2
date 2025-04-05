@@ -38,7 +38,7 @@ export default function ProfilePage() {
       .then((res) => res.json())
       .then(setCategories)
       .catch((err) => console.error('Villa við að sækja flokka:', err));
-  }, [user]);
+  }, [user, router]);
 
   if (!user) return null;
   return (

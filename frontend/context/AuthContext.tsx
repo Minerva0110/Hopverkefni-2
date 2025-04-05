@@ -9,8 +9,6 @@ type User = {
 };
 
 
-
-
 interface AuthContextType {
   token: string | null;
   user: User | null;

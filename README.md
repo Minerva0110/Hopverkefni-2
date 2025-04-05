@@ -1,8 +1,10 @@
 # Hopverkefni-2
 
+til þess að logga inn skaltu nota aðganginn: admin lykillorð: test123
+
 ## Vefforritun 2 - Uppsetning og Keyrsla
 
-Velkomin/n! Þetta er leiðbeiningar um hvernig á að setja upp og keyra verkefnið **Hopverkefni-1**.
+Velkomin/n! Þetta er leiðbeiningar um hvernig á að setja upp og keyra verkefnið **Hopverkefni-2**.
 
 ### **1️. Undirbúningur**
 Áður en þú byrjar, vertu viss um að þú sért með **Node.js**, **PostgreSQL** og **Prisma** uppsett á tölvunni þinni.

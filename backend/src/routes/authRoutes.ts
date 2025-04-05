@@ -32,22 +32,23 @@ router.post("/register", authenticate, isAdmin, validate(registerSchema), async 
   }
 });
 
-
-router.post("/login", validate(loginSchema), async (req, res): Promise<void> => {
+router.post("/login", validate(loginSchema), async (req, res) => {
   const { username, password } = req.body;
 
   const user = await db.user.findUnique({
-    where: { username: username },
+    where: { username },
   });
-  
+
   if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(401).json({ error: "Invalid username or password" });
     return;
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username, role: user.role }, SECRET_KEY, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    SECRET_KEY,
+    { expiresIn: "1h" }
+  );
 
   res.json({
     token,
@@ -58,7 +59,26 @@ router.post("/login", validate(loginSchema), async (req, res): Promise<void> => 
     },
   });
 });
-  
+
+router.get("/me", authenticate, async (req: AuthRequest, res) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: req.user?.id },
+      select: { id: true, username: true, email: true, role: true },
+    });
+
+    if (!user) {
+      res.status(404).json({ error: "Notandi fannst ekki" });
+      return;
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: "Villa við að sækja notanda" });
+  }
+});
+
+
 router.get("/user", authenticate, (req: AuthRequest, res) => {
   res.json({ message: `Welcome ${req.user?.username}, you are logged in as ${req.user?.role}` });
 });
