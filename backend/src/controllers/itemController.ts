@@ -37,7 +37,7 @@ export const getItemById = async (req: Request, res: Response): Promise<void> =>
 export const createItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { title, description, priority, due, categoryId } = req.body;
-    const user = req.user; // Token verður yfirfarið og notandinn fenginn úr session
+    const user = req.user;
 
     if (!user) {
       res.status(401).json({ error: "Not authenticated" });
@@ -54,7 +54,7 @@ export const createItem = async (req: Request, res: Response): Promise<void> => 
         ...(categoryId && {
           category: {
             connect: {
-              id: categoryId,
+              id: Number(categoryId),
             },
           },
         }),
