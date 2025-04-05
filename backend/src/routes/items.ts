@@ -4,7 +4,7 @@ import { authenticate } from "../middleware/auth.js";
 
 const router = Router();
 
-router.get("/", getItems);
+router.get("/", authenticate, getItems); 
 router.get("/:id", getItemById);
 router.post("/", authenticate, createItem);
 router.put("/:id", authenticate, updateItem);

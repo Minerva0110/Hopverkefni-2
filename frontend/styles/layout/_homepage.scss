@@ -1,0 +1,41 @@
+.homepage {
+  padding: 3rem 1.5rem;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    padding: 1.5rem;
+    letter-spacing: 0.05rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .intro-text {
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}

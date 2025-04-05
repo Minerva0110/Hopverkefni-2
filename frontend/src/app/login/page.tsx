@@ -44,7 +44,7 @@ export default function LoginPage() {
 
   
       if (data.user.role === 'admin') {
-        router.push('/admin');
+        router.push('/');
       } else {
         router.push('/profile');
       }
@@ -59,27 +59,27 @@ export default function LoginPage() {
     }
   }
 
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Innskráning</h1>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
+    <form onSubmit={handleSubmit} className="login-form">
+      <h1>Innskráning</h1>
+      {error && <p className="error-message">{error}</p>}
+      
       <input
         type="text"
         placeholder="Notandanafn"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="w-full p-2 mb-2 border rounded"
       />
+      
       <input
         type="password"
         placeholder="Lykilorð"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 mb-4 border rounded"
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Skrá inn
-      </button>
+      
+      <button type="submit">Skrá inn</button>
     </form>
   );
 }

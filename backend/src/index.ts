@@ -25,6 +25,7 @@ app.use("/images", imageRoutes);
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes); 
 
+
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });

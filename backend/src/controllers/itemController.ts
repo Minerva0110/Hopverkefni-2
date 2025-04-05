@@ -5,13 +5,18 @@ export const getItems = async (req: Request, res: Response) => {
   try {
     const items = await prisma.item.findMany({
       orderBy: { due: "asc" },
+      include: {
+        category: true, 
+      },
     });
+
     res.json(items);
   } catch (error) {
     console.error("Error fetching items:", error);
     res.status(500).json({ error: "Failed to fetch items" });
   }
 };
+
 
 export const getItemById = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -32,16 +37,36 @@ export const getItemById = async (req: Request, res: Response): Promise<void> =>
 
 export const createItem = async (req: Request, res: Response): Promise<void> => {
   try {
+    const { title, description, priority, due, categoryId } = req.body;
+    const user = req.user; 
+
+    if (!user) {
+      res.status(401).json({ error: "Not authenticated" });
+      return;
+    }
+
+
     const newItem = await prisma.item.create({
       data: {
-        title: req.body.title,
+        title,
+        description,
+        priority,
+        due: new Date(due),
+        userId: user.id, 
+        ...(categoryId && {
+          category: {
+            connect: {
+              id: categoryId,
+            },
+          },
+        }),
       },
     });
 
-    res.status(201).json(newItem); 
+    res.status(201).json(newItem);
   } catch (error) {
     console.error("Error creating item:", error);
-    res.status(500).json({ error: "Failed to create item" }); 
+    res.status(500).json({ error: "Failed to create item" });
   }
 };
 
