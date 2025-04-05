@@ -7,6 +7,8 @@
 @use './components/addItemForm';
 @use './layout/homepage';
 @use './components/login';
+@use './layout/adminpage';
+@use './layout/profilepage';
 
 
 $primary-color: #333;
@@ -17,7 +19,7 @@ $font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 body {
   font-family: $font-stack;
-  background-color: #f7f7f7;
+  background-color: #F6F5F5;
   color: $secondary-color;
   line-height: 1.6;
   margin: 0;

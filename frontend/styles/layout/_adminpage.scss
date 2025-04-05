@@ -1,0 +1,97 @@
+$primary-color: #3E5879;
+$secondary-color: #333;
+$input-background: #f1f1f1;
+$button-background: $primary-color;
+$button-hover: darken($button-background, 10%);
+$font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+.admin-page {
+  background-color: #F6F5F5;
+  font-family: $font-stack;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem 1rem;
+
+  .admin-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; 
+    text-align: center;
+
+    h1 {
+      color: $primary-color;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .message {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .error-message {
+      color: red;
+    }
+
+    .success-message {
+      color: green;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      input,
+      select {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: $input-background;
+        color: $secondary-color;
+        font-size: 1rem;
+
+        &:focus {
+          border-color: $primary-color;
+          outline: none;
+        }
+      }
+
+      button {
+        background-color: $button-background;
+        color: white;
+        padding: 0.8rem;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%; 
+
+        &:hover {
+          background-color: $button-hover;
+        }
+
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 1.5rem 1rem;
+
+    .admin-container {
+      width: 100%;
+      padding: 1.5rem;
+    }
+  }
+}

@@ -1,8 +1,6 @@
-// _loginForm.scss
-
 $secondary-color: #333;
 $input-background: #f1f1f1;
-$button-background: #3c2954;
+$button-background: #3E5879;
 $button-hover: darken($button-background, 10%);
 $font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
@@ -11,11 +9,11 @@ $font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0 auto;
   font-family: $font-stack;
   width: 100%;
-  max-width: 400px; // Keeps it centered and readable
-  text-align: center; // Center align the form content
+  max-width: 400px; 
+  text-align: center; 
 
   h1 {
-    color: #0070f3; // Direct color for the title
+    color: #3E5879; 
     margin-bottom: 1.5rem;
     font-size: 2rem;
     font-weight: bold;
@@ -38,7 +36,7 @@ $font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1rem;
 
     &:focus {
-      border-color: #0070f3; // Focus border color
+      border-color: #ccc;
       outline: none;
     }
   }
@@ -63,7 +61,6 @@ $font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
   }
 
-  // Responsive Design
   @media (max-width: 600px) {
     padding: 1.5rem;
     h1 {

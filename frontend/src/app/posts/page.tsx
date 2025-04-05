@@ -19,6 +19,7 @@ export default function PostsPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const [showMessage, setShowMessage] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -74,6 +75,10 @@ export default function PostsPage() {
     }
   };
 
+  const handleToggleMessage = () => {
+    setShowMessage((prev) => !prev);
+  };
+
   if (loading) return <p className="p-4">Sæki færslur...</p>;
 
   if (isAuth === false) {
@@ -85,7 +90,21 @@ export default function PostsPage() {
   }
   return (
     <div className="posts-page">
-      <h1 className="page-title">Færslur</h1>
+      <div className="page-header">
+        <h1 className="page-title">Færslur</h1>
+        <button
+          onClick={handleToggleMessage}
+          className="question-mark-btn"
+        >
+          ℹ️
+        </button>
+      </div>
+  
+      {showMessage && (
+        <p className="info-message">
+          Hér eru færslurnar þínar. Til að bæta við nýjum færslum, vinsamlegast farðu í prófílinn þinn.
+        </p>
+      )}
   
       {items.length === 0 ? (
         <p className="empty-message">Engar færslur fundust.</p>
@@ -114,8 +133,6 @@ export default function PostsPage() {
                   </div>
   
                   <p className="item-description">{item.description}</p>
-  
-      
                   <p className="item-meta">
                     Skiladagur: {new Date(item.due).toLocaleDateString('is-IS')}
                   </p>

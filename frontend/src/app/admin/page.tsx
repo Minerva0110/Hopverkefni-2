@@ -44,47 +44,43 @@ export default function AdminPage() {
     }
   }
 
+
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded">
-      <h1 className="text-2xl font-bold mb-6">Bæta við notanda</h1>
+    <div className="admin-page">
+      <div className="admin-container">
+        <h1>Bæta við notanda</h1>
+        {message && <p className="message success-message">{message}</p>}
+        {error && <p className="message error-message">{error}</p>}
 
-      {message && <p className="text-green-600 mb-4">{message}</p>}
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Notandanafn"
-          value={formData.username}
-          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="email"
-          placeholder="Netfang"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Lykilorð"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          className="w-full p-2 border rounded"
-        />
-        <select
-          value={formData.role}
-          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-          className="w-full p-2 border rounded"
-        >
-          <option value="user">Notandi</option>
-          <option value="admin">Stjórnandi</option>
-        </select>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Bæta við
-        </button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Notandanafn"
+            value={formData.username}
+            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+          />
+          <input
+            type="email"
+            placeholder="Netfang"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+          <input
+            type="password"
+            placeholder="Lykilorð"
+            value={formData.password}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+          />
+          <select
+            value={formData.role}
+            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+          >
+            <option value="user">Notandi</option>
+            <option value="admin">Stjórnandi</option>
+          </select>
+          <button type="submit">Bæta við</button>
+        </form>
+      </div>
     </div>
   );
 }

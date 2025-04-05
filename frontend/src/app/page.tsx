@@ -4,7 +4,7 @@ import '../../styles/globals.scss';
 export default function HomePage() {
   return (
     <main className="homepage">
-      <h1 className="text-3xl font-bold">Verkefnalisti</h1>
+      <h1>Verkefnalisti</h1>
       <div className="intro-text">
         <p>Þetta verkefni er unnið fyrir Vefforritun 2 – hópverkefni 2.</p>
         <p>

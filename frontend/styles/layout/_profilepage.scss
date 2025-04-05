@@ -1,0 +1,138 @@
+$primary-color: #3E5879;
+$secondary-color: #333;
+$accent-color: #f1f1f1;
+$button-background: $primary-color;
+$button-hover: darken($button-background, 10%);
+$font-stack: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+.profile-page {
+  font-family: $font-stack;
+  background-color: #F6F5F5;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  
+  h1 {
+    color: $primary-color;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: $secondary-color;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button {
+    background-color: $button-background;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2rem;
+
+    &:hover {
+      background-color: $button-hover;
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  .category-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px $shadow-color;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 6px 12px $shadow-color;
+    }
+
+    h2 {
+      color: #000;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .item-list {
+      list-style: none;
+      padding: 0;
+
+      .item {
+        background-color: $accent-color;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px $shadow-color;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &:hover {
+          box-shadow: 0 4px 8px $shadow-color;
+        }
+
+        h3 {
+          font-size: 1.25rem;
+          color: $primary-color;
+          font-weight: 600;
+        }
+
+        .priority {
+          color: red
+          ;
+          font-size: 0.875rem;
+          padding: 0.25rem 0.5rem;
+          border-radius: 0.25rem;
+          font-weight: bold;
+        }
+
+        p {
+          font-size: 1rem;
+          color: $secondary-color;
+        }
+
+        .due-date {
+          font-size: 0.875rem;
+          color: #6b7280;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+    }
+
+    .category-container {
+      padding: 1rem;
+    }
+  }
+}
