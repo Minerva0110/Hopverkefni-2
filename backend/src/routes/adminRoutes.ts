@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authenticate, isAdmin } from "../middleware/auth.js";
 import db from "../models/db.js";
+import bcrypt from "bcrypt";
 
 const router = Router();
 
@@ -13,6 +14,28 @@ router.get("/users", authenticate, isAdmin, async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/users", authenticate, isAdmin, async (req, res, next) => {
+  try {
+    const { username, email, password, role } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.user.create({
+      data: {
+        username,
+        email,
+        password: hashedPassword,
+        role: role || "user",
+      },
+    });
+
+    res.status(201).json({ message: "Notandi búinn til!" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 router.patch("/users/:id/role", authenticate, isAdmin, async (req, res, next) => {
   try {

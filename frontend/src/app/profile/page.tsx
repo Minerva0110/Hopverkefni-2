@@ -29,7 +29,7 @@ export default function ProfilePage() {
       return;
     }
 
-    fetch('http://localhost:3000/categories')
+    fetch('http://localhost:3001/categories')
       .then((res) => res.json())
       .then(setCategories)
       .catch((err) => console.error('Villa við að sækja flokka:', err));

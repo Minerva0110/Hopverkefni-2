@@ -19,7 +19,7 @@ export default function PostsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/items')
+    fetch('http://localhost:3001/items')
       .then((res) => res.json())
       .then((data) => {
         setItems(data);

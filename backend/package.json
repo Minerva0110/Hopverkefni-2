@@ -54,8 +54,7 @@
     "typescript": "^5.8.2"
   },
   "prisma": {
-  "seed": "node --loader ts-node/esm prisma/seed.mts",
-  "schema": "prisma/schema.prisma"
-}
-
+    "seed": "node --loader ts-node/esm prisma/seed.mts",
+    "schema": "prisma/schema.prisma"
+  }
 }

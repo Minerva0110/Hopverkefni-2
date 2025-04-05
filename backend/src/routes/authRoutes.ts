@@ -11,7 +11,7 @@ dotenv.config();
 const SECRET_KEY = process.env.JWT_SECRET || "supersecretkey";
 const router = Router();
 
-router.post("/register", validate(registerSchema), async (req, res) => {
+router.post("/register", authenticate, isAdmin, validate(registerSchema), async (req, res) => {
   const { username, email, password, role } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,7 +20,7 @@ router.post("/register", validate(registerSchema), async (req, res) => {
     await db.user.create({
       data: {
         username,
-        email, 
+        email,
         password: hashedPassword,
         role: role || "user",
       },
@@ -31,6 +31,7 @@ router.post("/register", validate(registerSchema), async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 router.post("/login", validate(loginSchema), async (req, res): Promise<void> => {
   const { username, password } = req.body;

@@ -18,7 +18,7 @@ export default function AdminPage() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:3000/users", {
+      const res = await fetch("http://localhost:3001/admin/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
